@@ -1,50 +1,29 @@
 $(function() {
 
+var arrStr = [];
+
 function randomString() {
   var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var str = '';
-
   for(i = 0; i < 10; i++){
     str += chars[Math.floor(Math.random() * chars.length)]
   }
   return str;
 }
 
-  //  var arrStr = [];
-    // function randomString() {
-    //         var chars = '0123';
-    //         var str = '';
-    //         var arrStr = [];
-
-
-    //           for(i = 0; i < 8; i++){
-    //             str += chars[Math.floor(Math.random() * chars.length)]
-
-    //           }
-
-    //         arrStr= arrStr.concat(str);
-
-    //         if (!arrStr.includes(str)){
-    //           return str;
-    //         }
-    //         else {
-    //           for(i = 0; i < 8; i++){
-    //             str += chars[Math.floor(Math.random() * chars.length)]
-
-    //           }
-    //         }
-    //    console.log(arrStr);
-    // }
-
-//propozycja includes czy to dobry trop??!!!??
-
-
-    // console.log(randomString());
-
+function generateId() {
+  var random = randomString();
+  if(arrStr.includes(random)){
+    randomString();
+    return generateId();
+  }
+  arrStr.push(random);
+  return random;  
+}
 
 function Column(name) {
   var self = this;
-  this.id = randomString();
+  this.id = generateId();
   this.name = name;
   this.$element = createColumn();
 
